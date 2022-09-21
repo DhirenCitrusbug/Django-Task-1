@@ -10,12 +10,17 @@
     <h1>Login</h1>
     <form action="" method="post" novalidate>
         {% csrf_token %}
-        Username  <br>
-        <input type="text" name="username" value="Dhiren" maxlength="40" required id="id_username"> <br> <br>
-        Password  <br>
-        <input type="password" name="password" maxlength="128" required id="id_password"> <br>
-
+        <!-- {% csrf_token %}
+        {% for field in form %}
+        {{field.label}} <br>
+        {{field}} {% if field.errors %} {{field.errors}} {% endif %} <br> 
+        {% endfor %} -->
+        
+            {{form.as_p}}
         <input type="submit">
     </form>
+
+    <a href="{% url 'change_password' %}"> Change Password </a>
+
 </body>
 </html>

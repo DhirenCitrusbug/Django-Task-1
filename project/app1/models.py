@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUse
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, username,email,  password=None):
+    def create_user(self, username,email,fname=None,lname=None , password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -19,6 +19,8 @@ class MyUserManager(BaseUserManager):
         user = self.model(
             username=username,
             email=self.normalize_email(email),
+            fname =fname,
+            lname=lname
         )
         user.set_password(password)
         user.save(using=self._db)

@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on localhost:8000
+From: webmaster@localhost
+To: dhiren.citrusbug@gmail.com
+Date: Wed, 21 Sep 2022 12:40:36 -0000
+Message-ID: <166376403697.7384.4821289277200276218@DESKTOP-UMU59M8>
+
+
+You're receiving this email because you requested a password reset for your user account at localhost:8000.
+
+Please go to the following page and choose a new password:
+
+http://localhost:8000/accounts/reset/NA/bc455o-8c1a25f2a9c436c14d60e5cc01cdc3a4/
+
+Your username, in case you’ve forgotten: Dhiren
+
+Thanks for using our site!
+
+The localhost:8000 team
+
+
+
+-------------------------------------------------------------------------------
