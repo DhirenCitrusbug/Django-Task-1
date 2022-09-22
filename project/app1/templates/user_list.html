@@ -7,18 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-
     <h1>User List</h1>
-   
-        <h4>Username - {{myuser}}</h4>
-        <ul>
-            <li>First Name-{{myuser.fname}}</li>
-            <li>Last Name - {{myuser.lname}}</li>
-            <li>Email ID - {{myuser.email}}</li>
-        </ul>
-        <a href="{% url 'user_delete' myuser.pk %}" style="text-decoration: none;background-color: red;padding: 0.8rem 1rem;">Delete</a>
-        
-        
+    <ul>
+        {% for user in object_list %}
+        <li style="padding: 5px;list-style:decimal;">
+           <a href="{% url 'user_detail' user.pk %}" style="text-decoration:none;color:rgb(0, 0, 0);">{{user}}</a> 
+            {% endfor %}
+        </li>
+    </ul>
+    
     <!-- <form action="" method="post" novalidate>
         {% csrf_token %}
         {% for fields in form %}

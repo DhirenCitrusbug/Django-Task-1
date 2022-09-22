@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Update user</h1>
     <form action="" method="post" novalidate>
         {% csrf_token %}
         <!-- {% csrf_token %}
@@ -20,7 +20,7 @@
         <input type="submit">
     </form>
 
-    <a href="{% url 'password_reset' %}"> Forgot Password? </a>
+    <a href="{% url 'change_password' %}"> Change Password </a>
 
 </body>
 </html>

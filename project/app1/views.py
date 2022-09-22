@@ -4,6 +4,9 @@ from django.views import View
 from .models import MyUser
 from .forms import LoginForm, RegistrationForm
 from django.contrib.auth.views import LoginView,PasswordChangeView,PasswordResetView,PasswordResetConfirmView,PasswordResetCompleteView
+from django.views.generic import ListView,UpdateView,DetailView,DeleteView
+from django.contrib.auth.forms import UserChangeForm
+from django.urls import reverse_lazy
 # from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 class Index(View):
@@ -29,20 +32,27 @@ class SignUp(View):
         else:
             return render(request,'signup.html',{'form':form})
 
-class UserDetail(View):
-    def get(self,request):
-        users = MyUser.objects.all()
-        return render(request,'users.html',{'users':users})
+class UserList(ListView):
+    model = MyUser
+    template_name = 'user_list.html'
 
-class UserUpdate(View):
-    def get(self,request,pk):
-        user = MyUser.objects.filter(pk=pk)
-        return render(request,'user_detail.html',{'user':user})
+class UserDetail(DetailView):
+    model = MyUser
+    template_name = 'user_detail.html'
+
+class UserUpdate(UpdateView):
+    form_class = UserChangeForm
+    template_name = 'user_update.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self):
+        return self.request.user
 
 
-
-
-
+class UserDelete(DeleteView):
+    model = MyUser
+    template_name = 'index.html'
+    success_url = reverse_lazy('user_list')
 
 
 
@@ -69,7 +79,7 @@ class MyPasswordResetCompleteView(PasswordResetCompleteView):
 
 
 
-
+[[[[[[[[[]]]]]]]]]
 
 
 
