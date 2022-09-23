@@ -2,11 +2,12 @@ import re
 from django.shortcuts import render,redirect
 from django.views import View
 from .models import MyUser
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm,MyPasswordChangeForm
 from django.contrib.auth.views import LoginView,PasswordChangeView,PasswordResetView,PasswordResetConfirmView,PasswordResetCompleteView
-from django.views.generic import ListView,UpdateView,DetailView,DeleteView
+from django.views.generic import ListView,UpdateView,DetailView #,DeleteView
 from django.contrib.auth.forms import UserChangeForm
 from django.urls import reverse_lazy
+
 # from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 class Index(View):
@@ -28,7 +29,7 @@ class SignUp(View):
             password = form.cleaned_data['password']
             user = MyUser.objects.create_user(username=username,fname=fname,lname=lname,email=email,password=password)
             user.save()
-            return render(request,'index.html')
+            return render(request,'login.html')
         else:
             return render(request,'signup.html',{'form':form})
 
@@ -49,18 +50,25 @@ class UserUpdate(UpdateView):
         return self.request.user
 
 
-class UserDelete(DeleteView):
-    model = MyUser
-    template_name = 'index.html'
-    success_url = reverse_lazy('user_list')
+# class UserDelete(DeleteView):
+#     model = MyUser
+#     template_name = 'index.html'
+#     success_url = reverse_lazy('user_list')
 
+class UserDelete(View):
+    def get(self,request,pk):
+        user = MyUser.objects.get(pk=pk)
+        user.delete()
+        return redirect('users')
 
 
 class MyLoginView(LoginView):
+    form_class = LoginForm
     template_name='login.html'
 
 
 class MyPasswordChangeView(PasswordChangeView):
+    form_class=MyPasswordChangeForm
     template_name='change_password.html'
     success_url = '/app1/logout'
 
@@ -76,10 +84,6 @@ class MyPasswordResetConfirmView(PasswordResetConfirmView):
 class MyPasswordResetCompleteView(PasswordResetCompleteView):
     template_name='password_reset_confirm.html'
 
-
-
-
-[[[[[[[[[]]]]]]]]]
 
 
 
